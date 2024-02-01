@@ -4,4 +4,20 @@
 > 2. 수집한 고객 리뷰 데이터와 상품 데이터를 이용해서 로그이니 시 개인이 작성한 리뷰, 별점을 이용한 개인화 세부 카테고리 추천 및 제품 추천 서비스 또한 제공하는 것이 이 프로젝트의 목표입니다.
 > 3. 리뷰에 많이 나타나는 단어 또한 워드클라우드를 통해 나타내었습니다.
 
+## 프로젝트 관련 정보
+|프로젝트 주제|기업요구사항 기반 문제해결 프로젝트|
+|---|---|
+|팀 세부 주제|쿠팡 리뷰데이터를 활용한 리뷰 별점 예측 자동화 시스템 및 쇼핑 카테고리 개인화 추천 시스템 개발|
+|프로젝트 기간|2023.12.29 ~ 2024.02.08 (3주)|
+|팀원 구성|박건원(조장), 정혜원(부조장), 황서진, 김창현|
 
+## 개발 환경
+|||
+|---|---|
+|Communication|google drive, slack, kakaotalk|
+|Languages|python, html5, css3, javascript|
+|Frameworks, Servers, and Libraries|django, bootstrap, apache hadoop, apache spark, apache airflow|
+|IDEs/Editors|jupyter notebook, visual studio code, google colab|
+|Hosting|aws ec2|
+|Modeling|tensorflow, keras, pytorch, mxnet, cuda, cudnn|
+|Database|MySQL|

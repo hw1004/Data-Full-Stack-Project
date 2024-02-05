@@ -1,0 +1,403 @@
+{% extends 'base.html' %}
+{% block contents %}
+{% load static %}
+<form id="categoryForm" method="POST" action="{% url 'recommendation:category' %}">
+  {% csrf_token %}
+    {{ form.as_p }}
+  <style>
+    .box{
+      display : flex;
+      justify-content : center;
+    }
+    .text{
+      text-align : center;
+      margin : 25px;
+      padding : 20px;
+    }
+  .box2{
+    border-style : solid;
+    display : flex;
+    justify-content : center;
+    padding : 12px;
+  }
+  .top{
+    margin-right : 30px;
+    text-align : center;
+  }
+  .bottom{
+    margin-right : 30px;
+    text-align : center;
+  }
+  .btn{
+    text-align : center;
+    margin-left : 20px;
+  }
+  .category{
+    display : flex;
+    justify-content : center;
+  }
+  .wordcloud{
+    display : flex;
+    justify-content : center;
+  }
+  </style>
+  <br>
+  <div class='title'>
+    <br>
+    <h3 style="text-align: center; font-weight: bold; color: #ac5034;" > 리뷰 분석 시각화 </h3>
+</div>
+  
+    <br>
+ <div class="box">
+    
+      <p class='text' style="font-size: 18px;">
+           <strong>15개의 메인 카테고리, 153개의 세부 카테고리</strong>의 <br>16만건 이상 리뷰 데이터를 <br>워드 클라우드와 랭킹 등 각종 시각화 자료로 제시합니다.
+      </p>
+      
+</div>
+<br>
+      <br>
+    <br>
+    <!-- Top Select Box -->
+<div class='box2' style="width: 20cm; justify-content:center; display: flex; margin: auto; border-color:#ac5034 ;border: 2px solid #ac5034; background-color: #f8f9fa; text-align: center; width: 60%; margin: 0 auto; padding: 20px; border-radius: 10px;">
+  <div class='top'>
+    <label  for="topSelect">메인카테고리</label>
+    <select id="topSelect" name='topSelect' onchange="updateBottomSelect()">
+        <option value="전체">전체</option>
+        {% comment %} <option value='패션의류/잡화'>패션의류/잡화</option> {% endcomment %}
+        <option value='뷰티'>뷰티</option>
+        <option value='출산/유아동'>출산/유아동</option>
+        <option value='식품'>식품</option>
+        <option value='주방용품'>주방용품</option>
+        <option value='생활용품'>생활용품</option>
+        <option value='홈인테리어'>홈인테리어</option>
+        <option value='가전디지털'>가전디지털</option>
+        <option value='스포츠/레저'>스포츠/레저</option>
+        <option value='자동차용품'>자동차용품</option>
+        <option value='도서/음반/DVD'>도서/음반/DVD</option>
+        <option value='완구/취미'>완구/취미</option>
+        <option value='문구/오피스'>문구/오피스</option>
+        <option value='반려동물용품'>반려동물용품</option>
+        <option value='헬스/건강식품'>헬스/건강식품</option>
+    </select>
+  </div>
+
+  <div class= 'bottom'>
+    <!-- Bottom Select Box -->
+    <label  for="bottomSelect">세부카테고리</label>
+    <select id="bottomSelect" name='bottomSelect'>
+        <!-- Options will be dynamically updated using JavaScript -->
+    </select>
+
+    <script>
+        // Function to update the options of the bottom select box based on the selection in the top select box
+        function updateBottomSelect() {
+            // Get the selected value from the top select box
+            var topSelectValue = document.getElementById("topSelect").value;
+
+            // Get the bottom select box
+            var bottomSelect = document.getElementById("bottomSelect");
+
+            // Clear existing options
+            bottomSelect.innerHTML = "";
+
+            // Add new options based on the selected value from the top select box
+            switch (topSelectValue) {
+                case '전체':
+                    bottomSelect.add(new Option('전체'));
+                    break;
+                {% comment %} case "패션의류/잡화": {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('전체')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('여성패션')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('남성패션')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('남녀 공용 의류')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('유아동패션')); {% endcomment %}
+                    break;
+                case "뷰티":
+                    bottomSelect.add(new Option('전체'));
+                    bottomSelect.add(new Option('로켓럭셔리'));
+                    bottomSelect.add(new Option('스킨케어'));
+                    bottomSelect.add(new Option('클린/비건뷰티'));
+                    bottomSelect.add(new Option('클렌징/필링'));
+                    bottomSelect.add(new Option('더마코스메틱'));
+                    {% comment %} bottomSelect.add(new Option('메이크업')); {% endcomment %}
+                    bottomSelect.add(new Option('향수'));
+                    bottomSelect.add(new Option('남성화장품'));
+                    bottomSelect.add(new Option('네일'));
+                    {% comment %} bottomSelect.add(new Option('뷰티소품')); {% endcomment %}
+                    bottomSelect.add(new Option('어린이화장품'));
+                    bottomSelect.add(new Option('로드샵'));
+                    bottomSelect.add(new Option('헤어'));
+                    bottomSelect.add(new Option('바디'));
+                    bottomSelect.add(new Option('선물세트/키트'));
+                    break;
+                case "출산/유아동":
+                    bottomSelect.add(new Option('전체'));
+                    bottomSelect.add(new Option('유아동패션'));
+                    bottomSelect.add(new Option('기저귀'));
+                    bottomSelect.add(new Option('물티슈'));
+                    bottomSelect.add(new Option('분유/어린이식품'));
+                    bottomSelect.add(new Option('어린이 건강식품'));
+                    bottomSelect.add(new Option('수유용품'));
+                    bottomSelect.add(new Option('이유용품/유아식기'));
+                    bottomSelect.add(new Option('매트/안전용품'));
+                    bottomSelect.add(new Option('유모차/웨건'));
+                    bottomSelect.add(new Option('카시트'));
+                    bottomSelect.add(new Option('아기띠/외출용품'));
+                    bottomSelect.add(new Option('욕실용품/스킨케어'));
+                    bottomSelect.add(new Option('위생/건강/세제'));
+                    bottomSelect.add(new Option('유아동침구'));
+                    bottomSelect.add(new Option('유아가구/인테리어'));
+                    bottomSelect.add(new Option('완구/교구'));
+                    break;
+                 case "식품":
+                    bottomSelect.add(new Option('전체'));
+                    bottomSelect.add(new Option('유기농/친환경 전문관'));
+                    bottomSelect.add(new Option('과일'));
+                    bottomSelect.add(new Option('견과/건과'));
+                    bottomSelect.add(new Option('채소'));
+                    bottomSelect.add(new Option('쌀/잡곡'));
+                    bottomSelect.add(new Option('축산/계란'));
+                    bottomSelect.add(new Option('수산물/건어물'));
+                    bottomSelect.add(new Option('생수/음료'));
+                    bottomSelect.add(new Option('커피/원두/차'));
+                    bottomSelect.add(new Option('과자/초콜릿/시리얼'));
+                    bottomSelect.add(new Option('면/통조림/가공식품'));
+                    bottomSelect.add(new Option('가루/조미료/오일'));
+                    bottomSelect.add(new Option('장/소스/드레싱/식초'));
+                    bottomSelect.add(new Option('유제품/아이스크림'));
+                    bottomSelect.add(new Option('냉장/냉동/간편요리'));
+                    bottomSelect.add(new Option('건강식품'));
+                    break;
+                 case "주방용품":
+                    bottomSelect.add(new Option('전체'));
+                    bottomSelect.add(new Option('주방가전'));
+                    bottomSelect.add(new Option('냄비/프라이팬'));
+                    bottomSelect.add(new Option('주방조리도구'));
+                    {% comment %} bottomSelect.add(new Option('그릇/홈세트')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('수저/커트러리')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('컵/텀블러/와인용품')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('주전자/커피/티용품')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('주방수납/정리')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('밀폐저장/도시락')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('주방잡화')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('일회용품/종이컵')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('보온/보냉용품')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('1인가구 주방용품')); {% endcomment %}
+                    break;
+                 case "생활용품":
+                    bottomSelect.add(new Option('전체'));
+                    bottomSelect.add(new Option('방한용품'));
+                    bottomSelect.add(new Option('헤어'));
+                    bottomSelect.add(new Option('바디/세안'));
+                    bottomSelect.add(new Option('구강/면도'));
+                    bottomSelect.add(new Option('화장지/물티슈'));
+                    bottomSelect.add(new Option('생리대/성인기저귀'));
+                    bottomSelect.add(new Option('기저귀'));
+                    bottomSelect.add(new Option('세탁세제'));
+                    bottomSelect.add(new Option('청소/주방세제'));
+                    bottomSelect.add(new Option('탈취/방향/살충'));
+                    bottomSelect.add(new Option('건강/의료용품'));
+                    bottomSelect.add(new Option('성인용품(19)'));
+                    bottomSelect.add(new Option('세탁/청소용품'));
+                    bottomSelect.add(new Option('욕실용품'));
+                    {% comment %} bottomSelect.add(new Option('생활전기용품')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('수납/정리')); {% endcomment %}
+                    break;
+                 case "홈인테리어":
+                    bottomSelect.add(new Option('전체'));
+                    bottomSelect.add(new Option('방한용품'));
+                    bottomSelect.add(new Option('F/W 침구샵'));
+                    bottomSelect.add(new Option('싱글하우스'));
+                    bottomSelect.add(new Option('홈데코'));
+                    bottomSelect.add(new Option('가구'));
+                    bottomSelect.add(new Option('수납/정리'));
+                    bottomSelect.add(new Option('침구'));
+                    bottomSelect.add(new Option('커튼/블라인드'));
+                    bottomSelect.add(new Option('카페트/쿠션/거실화'));
+                    bottomSelect.add(new Option('수예/수선'));
+                    bottomSelect.add(new Option('욕실용품'));
+                    bottomSelect.add(new Option('조명/스탠드'));
+                    bottomSelect.add(new Option('셀프인테리어'));
+                    bottomSelect.add(new Option('원예/가드닝'));
+                    bottomSelect.add(new Option('생활전기용품'));
+                    bottomSelect.add(new Option('공구/철물/DIY'));
+                    break;
+                 case "가전디지털":
+                    bottomSelect.add(new Option('전체'));
+                    bottomSelect.add(new Option('TV/영상가전'));
+                    bottomSelect.add(new Option('냉장고'));
+                    bottomSelect.add(new Option('세탁기/건조기'));
+                    bottomSelect.add(new Option('생활가전'));
+                    bottomSelect.add(new Option('청소기'));
+                    bottomSelect.add(new Option('계절가전'));
+                    bottomSelect.add(new Option('뷰티/헤어가전'));
+                    bottomSelect.add(new Option('건강가전'));
+                    bottomSelect.add(new Option('주방가전'));
+                    bottomSelect.add(new Option('노트북'));
+                    bottomSelect.add(new Option('데스크탑'));
+                    bottomSelect.add(new Option('모니터'));
+                    bottomSelect.add(new Option('휴대폰'));
+                    {% comment %} bottomSelect.add(new Option('테블릿PC')); {% endcomment %}
+                    bottomSelect.add(new Option('스마트워치/밴드'));
+                    {% comment %} bottomSelect.add(new Option('게임')); {% endcomment %}
+                    break;
+                 case "스포츠/레저":
+                    bottomSelect.add(new Option('전체'));
+                    bottomSelect.add(new Option('캠핑전문관'));
+                    bottomSelect.add(new Option('홈트레이닝'));
+                    bottomSelect.add(new Option('수영/수상스포츠'));
+                    {% comment %} bottomSelect.add(new Option('골프')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('자전거')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('킥보드/스케이트')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('낚시')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('등산/아웃도어')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('스포츠신발')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('남성스포츠의류')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('여성스포츠의류')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('스포츠잡화')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('구기스포츠')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('라켓스포츠')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('헬스/요가/댄스')); {% endcomment %}
+                    break;
+                 case "자동차용품":
+                    bottomSelect.add(new Option('전체'));
+                    bottomSelect.add(new Option('겨울철 차량관리'));
+                    bottomSelect.add(new Option('인테리어'));
+                    bottomSelect.add(new Option('익스테리어'));
+                    bottomSelect.add(new Option('세차/카케어'));
+                    {% comment %} bottomSelect.add(new Option('차량용 전자기기')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('차량관리/소모품')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('RV/아웃도어')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('부품/안전/공구')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('오토바이용품')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('로켓설치 타이어')); {% endcomment %}
+                    break;
+                 case "도서/음반/DVD":
+                    bottomSelect.add(new Option('전체'));
+                    {% comment %} bottomSelect.add(new Option('유아/어린이')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('소설/에세이/시')); {% endcomment %}
+                    bottomSelect.add(new Option('초중고참고서'));
+                    bottomSelect.add(new Option('가정 살림'));
+                    bottomSelect.add(new Option('건강 취미'));
+                    {% comment %} bottomSelect.add(new Option('경제 경영')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('과학/공학')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('국어/외국어/사전')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('대학교재')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('만화/라이트노벨')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('사회 정치')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('수험서/자격증')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('여행')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('역사')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('예술')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('인문')); {% endcomment %}
+                    break;
+                 case "완구/취미":
+                    bottomSelect.add(new Option('전체'));
+                    bottomSelect.add(new Option('캐릭터별완구'));
+                    bottomSelect.add(new Option('신생아/영아완구'));
+                    bottomSelect.add(new Option('로봇/작동완구'));
+                    bottomSelect.add(new Option('역할놀이'));
+                    bottomSelect.add(new Option('블록놀이'));
+                    {% comment %} bottomSelect.add(new Option('인형')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('물놀이/계절완구')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('승용완구')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('스포츠/야외완구')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('실내대형완구')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('STEAM완구')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('학습완구/교구')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('보드게임')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('RC완구/부품')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('퍼즐/큐브/피젯토이')); {% endcomment %}
+                    {% comment %} bottomSelect.add(new Option('프라모델')); {% endcomment %}
+                    break;
+                 case "문구/오피스":
+                    bottomSelect.add(new Option('전체'));
+                    bottomSelect.add(new Option('사무용품 전문관'));
+                    bottomSelect.add(new Option('미술/화방용품'));
+                    bottomSelect.add(new Option('캐릭터 문구'));
+                    bottomSelect.add(new Option('학용품/수업준비'));
+                    bottomSelect.add(new Option('필기류'));
+                    bottomSelect.add(new Option('노트/메모지'));
+                    bottomSelect.add(new Option('다이어리/플래너'));
+                    bottomSelect.add(new Option('바인더/파일'));
+                    bottomSelect.add(new Option('파티/이벤트'));
+                    bottomSelect.add(new Option('데코/포장용품'));
+                    bottomSelect.add(new Option('카드/엽서/봉투'));
+                    bottomSelect.add(new Option('앨범'));
+                    bottomSelect.add(new Option('복사용품/라벨지'));
+                    bottomSelect.add(new Option('보드/칠판/광고'));
+                    break;
+                case "반려동물용품":
+                   bottomSelect.add(new Option('전체'));
+                   bottomSelect.add(new Option('강아지 사료'));
+                   bottomSelect.add(new Option('강아지 간식'));
+                   bottomSelect.add(new Option('강아지 영양제'));
+                   bottomSelect.add(new Option('강아지 용품'));
+                   bottomSelect.add(new Option('고양이 사료'));
+                   bottomSelect.add(new Option('고양이 간식'));
+                   bottomSelect.add(new Option('고양이 영양제'));
+                   bottomSelect.add(new Option('고양이 용품'));
+                   bottomSelect.add(new Option('펫티켓 산책용품'));
+                   bottomSelect.add(new Option('관상어 용품'));
+                   bottomSelect.add(new Option('소동물/가축용품'));
+                   break;
+                 case "헬스/건강식품":
+                   bottomSelect.add(new Option('전체'));
+                   bottomSelect.add(new Option('건강기능식품'));
+                   bottomSelect.add(new Option('성인용 건강식품'));
+                   bottomSelect.add(new Option('여성용 건강식품'));
+                   bottomSelect.add(new Option('남성용 건강식품'));
+                   bottomSelect.add(new Option('임산부 건강식품'));
+                   bottomSelect.add(new Option('시니어 건강식품'));
+                   bottomSelect.add(new Option('어린이 건강식품'));
+                   bottomSelect.add(new Option('비타민/미네랄'));
+                   bottomSelect.add(new Option('영양제'));
+                   bottomSelect.add(new Option('허브/식물추출물'));
+                   bottomSelect.add(new Option('홍삼/인삼'));
+                   bottomSelect.add(new Option('건강즙/음료'));
+                   bottomSelect.add(new Option('꿀/프로폴리스'));
+                   bottomSelect.add(new Option('건강분말/건강환'));
+                   bottomSelect.add(new Option('헬스보충식품'));
+                   bottomSelect.add(new Option('다이어트/이너뷰티'));
+                   break;
+                default:
+                    break;
+            }
+        }       
+    </script>
+  </div>
+    <input class='btn' type="submit" value="Submit" style="border-color:#ac5034; background-color:antiquewhite; color: black;">
+</div>
+<br>
+<br>
+
+<br>
+
+{% if request.method == 'POST'%}
+<div class="container" style="border-color:#ac5034 ;background-color:rgb(199, 151, 79); width: 300px;">
+<div class='category' style="font-size: 20px; color:white;">
+  <strong class="mt-2">{{category1}}</strong>
+</div>
+<br>
+<div class='category mb-2' style="font-size: 20px;color:white;">
+  <i class="mb-2">{{category2}}</i>
+</div>
+</div>
+<br>
+<br>
+<div class='wordcloud'>
+<img src="/static/images/{{wordcloud_plt}}" alt="Word Cloud"> 
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endif %}
+{% endblock contents %}
+
+</form>
+

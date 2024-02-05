@@ -1,0 +1,192 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>ZZINPANG</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+</head>
+<body>
+    <header class="center">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'recommendation:mainpage' %}" style="font-size:30px">
+                    &nbsp;&nbsp;&nbsp;&nbsp;ZZINPANG
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'recommendation:category' %}" style="color: darkred;">리뷰 분석/시각화</a>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'recommendation:index' %}" style="color: darkred;">추천 카테고리/상품</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'mycoupang:mypage' %}" style="color: darkred;">마이 쿠팡</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'recommendation:index_no_login' %}" style="color: darkred;">추천 카테고리/상품</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'mycoupang:rating_predict' %}" style="color: darkred;">별점 예측 시스템</a>
+                            </li>
+                        {% endif %}
+                        <!-- Add more navigation links as needed -->
+                    </ul>
+                </div>
+                <div class="full-width-container">
+                    <div class="container">
+                        <ul class="nav justify-content-end ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.coupang.com/" style="color: darkred;"><img src="{% static 'images/쿠팡로고.png' %}" alt="coupang" style="width: 90px; height: auto;"></a>
+                            </li>
+                            {% include "base_nav.html" %}
+                            {% block content %}{% endblock content %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div id="carouselExampleCaptions" class="carousel slide mx-auto" style="width: 100%;">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" style="height: 700px; overflow: hidden;">
+                    <img src="{% static '/images/사이트 이미지3.webp' %}" class="d-block w-100" alt="..." style="filter: brightness(0.6);">
+                    
+                    <div class="carousel-caption d-none d-md-block text-end mt-3 mr-5" style="position: absolute; top: 0; left: 400px; ">
+                        <div class="animated-text">
+                            <h1 class="animated fadeIn" style="font-weight: bold; font-size:40px; font-family:'Times New Roman', Times, serif">Personalized Recommendation & Rating Prediction</h1>
+                        </div>
+                    </div>
+                    <div class="carousel-caption d-none d-md-block text-end mt-3 mr-5" style="position: absolute; top: 300px; left: 400px; ">
+                        <div class="animated-text">
+                            <h1 class="animated fadeIn" style="font-weight: bold; font-size:200px; font-family:'Times New Roman', Times, serif">ZZINPANG</h1>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="carousel-item" style="height: 700px; overflow: hidden;">
+                    <img src="{% static '/images/메인.gif' %}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block text-end mt-3 mr-5" style="position: absolute; top: 140px; left: 750px;">
+                        <div>
+                            <h1 style="text-align: center;"> <strong><span class="ingredient" style="color:#ac5034">Our Services</span></strong></h1>
+                            <br>
+                            <br>
+                            <br>
+                            <ul class="list-unstyled" style="text-align: center;">
+                                <li class="mb-4" style=" background-color: white; width: 10cm; height:1cm; display: inline-block;">
+                                    <a href="{% url 'recommendation:category' %}" style="text-decoration: none; color: black;">
+                                        <p class="mb-3" style="font-size: 20px;"><strong>리뷰 분석/시각화</strong></p>
+                                    </a>
+                                </li>
+                                <br>
+                                <!-- Add similar blocks for other services -->
+                                {% comment %} 로그인을 안 한 사람일 경우 {% endcomment %}
+                                {% if request.user.is_anonymous %}
+                                    <li class="mb-4" style="background-color: white; width: 10cm; height:1cm; display: inline-block;">
+                                        <a href="{% url 'recommendation:index_no_login' %}" style="text-decoration: none; color: black;">
+                                            <p class="mb-3" style="font-size: 20px;"><strong>카테고리, 제품 개인화 추천 시스템</strong></p>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                <!-- Add similar blocks for other services -->
+                                {% comment %} 로그인을 안 한 사람일 경우 {% endcomment %}
+                                {% if request.user.is_authenticated %}
+                                    <li class="mb-4" style="background-color: white; width: 10cm; height:1cm; display: inline-block;">
+                                        <a href="{% url 'recommendation:index' %}" style="text-decoration: none; color: black;">
+                                            <p class="mb-3" style="font-size: 20px;"><strong>카테고리, 제품 개인화 추천 시스템</strong></p>
+                                        </a>
+                                    </li>
+                                    <br>
+                                {% endif %}
+                                <!-- Add similar blocks for other services -->
+                                {% comment %} 로그인을 한 사람일 경우 {% endcomment %}
+                                {% if request.user.is_authenticated %}
+                                    <li style="background-color: white; width: 10cm; height:1cm; display: inline-block;">
+                                        <a href="{% url 'mycoupang:mypage' %}" style="text-decoration: none; color:black;">
+                                            <p class="mb-3" style="font-size: 20px;"><strong>마이 쿠팡</strong></p>
+                                        </a>
+                                    </li>
+                                    <br>
+                                {% endif %}
+                                <!-- Add similar blocks for other services -->
+                                {% comment %} 로그인을 안 한 사람일 경우 {% endcomment %}
+                                {% if request.user.is_anonymous %}
+                                    <li style="background-color: white; width: 10cm; height:1cm; display: inline-block;">
+                                        <a href="{% url 'mycoupang:rating_predict' %}" style="text-decoration: none; color: black;">
+                                            <p class="mb-3" style="font-size: 20px;"><strong>리뷰 별점 자동화 예측 시스템</strong></p>
+                                        </a>
+                                    </li>
+                                    <br>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item " style="height: 700px; overflow: hidden;">
+                    <img src="{% static '/images/SE-610fbed1-0889-4c87-a76d-44a76f5128a9.jpg' %}" class="d-block w-100 h-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block text-end mt-3 mr-5" style="position: absolute; top: 20px; right: 30px;">
+                        <p class="mr-5" style=" font-size: 25px;">
+                            <strong style="font-size: 40px; color:antiquewhite; font-family:Arita Dotum;">ZZINPANG</strong> 과 함께 <br>효율적인 쿠팡라이프를 즐겨보세요
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"></script>
+    </header>
+    <div class="container justify-content-center">
+        {% block login %}{% endblock login %}
+        {% block signup %}{% endblock signup %}
+        {% block contents %}{% endblock contents %}
+        {% block recommend %}{% endblock recommend %}
+        {% block mypage %}{% endblock mypage %}
+        {% block main %}{% endblock main %}
+    </div>
+    
+</body>
+<footer class="text-start" style="background-color: black; padding: 20px;">
+    
+    <div class="container">
+        <h3 style="font-size: 14px; color: gray; margin-top: 30px;">멀티잇 데이터 분석&엔지니어(Python) 30회차</h3>
+        <h3 style="font-size: 14px; color: gray;">기업요구사항 기반의 문제해결 프로젝트</h3>
+        <h3 style="font-size: 14px; color: gray; margin-bottom: 30px;">찐빵조 (박건원, 정혜원, 김창현, 황서진)</h3>
+    </div>
+</footer>
+</html>

@@ -1,0 +1,15 @@
+
+{% comment %} 요청 보낸 사용자가 로그인하지 않았다면 {% endcomment %}
+{% if not request.user.is_authenticated %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url "users:login" %}" style="color: darkred;">Login</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url "users:signup" %}" style="color: darkred;">Signup</a>
+</li>
+{% comment %} 요청 보낸 사용자가 로그인 했다면 {% endcomment %}
+{% else %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url "users:logout" %}" style="color: darkred;">Logout</a>
+</li>
+{% endif %}

@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./shop.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>ZZINPANG</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body style="background-color: antiquewhite;"> 
+    <header class="center">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between">
+            <div class="container-fluid">
+                <a class="navbar-brand mx-auto" href="{% url 'recommendation:mainpage' %}"style="font-size:30px">
+                    &nbsp;&nbsp;&nbsp;&nbsp;ZZINPANG
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'recommendation:category' %}" style="color: darkred;">리뷰 분석/시각화</a>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'recommendation:index' %}" style="color: darkred;">추천 카테고리/상품</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'mycoupang:mypage' %}" style="color: darkred;">마이 쿠팡</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'recommendation:index_no_login' %}" style="color: darkred;">추천 카테고리/상품</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'mycoupang:rating_predict' %}" style="color: darkred;">별점 예측 시스템</a>
+                            </li>
+                        {% endif %}
+                        <!-- Add more navigation links as needed -->
+                    </ul>
+                </div>
+                <ul class="nav justify-content-end ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.coupang.com/" style="color: darkred;"><img src="{% static 'images/쿠팡로고.png' %}" alt="coupang" style="width: 90px; height: auto;"></a>
+                    </li>
+                    {% include "base_nav.html" %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container justify-content-center" >
+        {% block login %}{% endblock login %}
+        {% block signup %}{% endblock signup %}
+        {% block contents %}{% endblock contents %}
+        {% block recommend %}{% endblock recommend %}
+        {% block mypage %}{% endblock mypage %}
+        {% block main %}{% endblock main %}
+    </div>
+
+    <footer class="text-start" style="background-color: black; padding: 20px;">
+        <div class="container">
+            <h3 style="font-size: 14px; color: gray; margin-top: 30px;">멀티잇 데이터 분석&엔지니어(Python) 30회차</h3>
+            <h3 style="font-size: 14px; color: gray;">기업요구사항 기반의 문제해결 프로젝트</h3>
+            <h3 style="font-size: 14px; color: gray; margin-bottom: 30px;">찐빵조 (박건원, 정혜원, 김창현, 황서진)</h3>
+        </div>
+    </footer>
+</body>
+</html>

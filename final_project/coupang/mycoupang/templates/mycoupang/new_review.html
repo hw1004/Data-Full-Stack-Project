@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block mypage %}
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <title>index 페이지</title>
+  <script src="{% static '/js/jquery-3.7.1.min.js'%}"></script>
+  <script src="{% static '/js/star_predict.js'%}"></script>
+</head>
+<form class="mb-5" id="categoryForm" method="POST" style="border-color: burlywood;">
+    <h3 class="mt-5 mb-5" style="width:100%; text-align: center; color: darkred;"><strong>새 리뷰 작성</strong></h3>  
+      {% csrf_token %}
+      <div class="mt-5 container border" style=" background-color:burlywood; border-color: burlywood; width: 80%;">
+        <div class="container mt-3">{{ form.as_p }}</div>
+          
+        <div class="mb-4" style="display: flex; justify-content: flex-end;">
+            <input style="border-color:gray; background-color: white" type="submit" value="별점 예측하기" onclick="showResult(event)">
+        </div>
+    </div>
+    <div class="result-container mt-5" id="prediction_result" style="border: 2px solid #ac5034; background-color: #f8f9fa; text-align: center; display: none; width: 80%; margin: 0 auto; padding: 20px; border-radius: 10px;">
+        <p class="mt-4 mb-4" style="font-size: larger; color: #333;">
+            <!-- Ajax로 동적으로 삽입 될 내용 -->
+        </p>
+        
+    </div>
+    
+      
+      <script>
+          function showResult(event) {
+              event.preventDefault();
+              // 폼을 Ajax로 서버에 전송
+              $.ajax({
+                  type: 'POST',
+                  url: '/mypage/rating_predict_ajax/',
+                  data: $("#categoryForm").serialize(),
+                  success: function (response) {
+                      console.log(response.predict_result);
+      
+                      // 서버 응답을 받으면 결과 표시
+                      $("#prediction_result").html("고객님이 입력하신 리뷰의 예측 별점은 " + response.predict_result + "입니다.").show();
+                  },
+                  error: function (error) {
+                      console.log(error);
+                  }
+              });
+          }
+          
+      </script>
+    </form>  
+    <br>
+    <br>
+    <br>
+{% endblock mypage %}

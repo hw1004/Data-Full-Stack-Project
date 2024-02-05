@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block signup %}
+
+<form method="POST">
+  {% csrf_token %}
+  <br>
+  <br>
+  <br>
+  <h2 class="mt-5" style="text-align: center;"><strong>Signup</strong></h2>
+  <div class="container mt-5 border border-secondary rounded" style="text-align: center; width: 800px;">
+    <div class="mt-3 mb-3">
+      {{ form.as_p }}
+      <button class="mt-4">회원가입</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+</form>
+
+{% endblock signup %}

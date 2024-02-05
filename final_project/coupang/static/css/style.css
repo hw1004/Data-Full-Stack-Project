@@ -1,0 +1,65 @@
+
+/* 네비게이션 바 배경색, 폰트, 여백 등 스타일 지정 */
+.navbar {
+    background-color: #be8282; /* 배경색 */
+    font-family: 'Arial', sans-serif; /* 폰트 */
+    padding: 0 0; /* 위아래 여백 */
+}
+
+.nav-item{
+    margin-right: 20px;
+}
+
+.nav-item.active .nav-link {
+    color: #020202;
+    font-weight: bold;
+}
+nav.navbar {
+    margin-top: 0;
+    padding-top: 0;
+}
+.navbar-brand {
+    font-weight: bold; /* 로고 텍스트 굵게 */
+    color: #ac5034; /* 로고 텍스트 색상 */
+    font-size: 3rem; /* 로고 텍스트 사이즈 */
+    text-align: center;
+}
+.custom-navbar {
+    background-color: burlywood; /* Replace with your desired background color */
+}
+
+.navbar-nav .nav-item {
+    border-bottom: 1px solid #ddd; /* 목록 항목들의 하단에 선 추가 */
+    padding: 10px 20px; /* 각 목록 항목의 상하 여백 및 좌우 여백 설정 */
+}
+
+.navbar-nav .nav-link {
+    color: #ed2121; /* 메뉴 항목 텍스트 색상 */
+    font-weight: bold; /* 메뉴 항목 텍스트 굵게 */
+}
+
+.animated-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.animated-text h1 {
+    opacity: 0;
+    animation: fadeIn 2s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+                

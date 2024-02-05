@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block mypage %}
+<br>
+<div class="mt-2 continaer">
+  <br>
+  <h3 class="mt-4" style="width:auto; text-align: center; color: #ac5034;"><strong>{{ user.username }}님의 마이 쿠팡</strong></h3>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 mt-5">
+        <a href="{% url 'mycoupang:new_review_ajax' %}" style="border-radius:0%; font-size: 20px; width: 95%; background-color: #ac5034; border-color: #ac5034; display: flex; align-items: center; justify-content: center;" class="btn btn-primary" role="button"><strong>새 리뷰 작성</strong></a>
+      </div>
+      <div class='col-sm-10'>
+        <div class="row">
+          <br>
+    <div class="container mt-5" style="text-align: center; background-color: #ac5034;">
+      <h6 class="mt-2 mb-2" style="color: white;"><strong>나의 리뷰 관리</strong></h6>
+  </div>
+
+    {% for review in personalized %}
+    <div class="container" style="display: flex; justify-content: space-between; background-color: burlywood;">
+      <p class="mt-3"><strong style="color: brown; margin: 0;">{{review.product_name}}</strong> 
+    </p>
+      <div class="mt-3" style="text-align: right;">
+          <p style="font-size: 13px;">{{review.category1}}   {{review.category2}}</p>
+      </div>
+  </div>
+  <div class="container" style="display: flex; justify-content: space-between; background-color: antiquewhite;">
+    {% if review.ratings == '3' %}
+    <span class="mt-3" style="font-size: 20px; color: crimson; margin: 0;"><strong>★★★</strong></span>
+    {% elif review.ratings == '2' %}
+    <span class="mt-3" style="font-size: 20px; color: crimson; margin: 0;"><strong>★★</strong></span>
+    {% else %}
+    <span class="mt-3" style="font-size: 20px; color: crimson; margin: 0;"><strong>★</strong></span>
+    {% endif %}
+  </div>
+  
+  <div class="container mb-3" style="display: flex; justify-content: space-between; background-color: antiquewhite;">
+    <p>{{review.review_contents}}</p>
+  </div>
+  
+    {% endfor %}
+  </div>
+  </div>
+  </div>
+</div>
+</div>
+<br>
+<br>
+<br>
+{% endblock mypage %}
+

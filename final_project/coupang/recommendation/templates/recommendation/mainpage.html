@@ -1,0 +1,11 @@
+{% extends "base2.html" %}
+{% block main %}
+{% load static %}
+
+<form id="recommend" method="POST" action="{% url 'recommendation:mainpage' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+      
+    
+</form>
+{% endblock main %}

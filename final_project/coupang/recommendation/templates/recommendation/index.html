@@ -1,0 +1,2258 @@
+{% extends "base.html" %}
+{% block recommend %}
+{% load static %}
+<form id="recommend" method="POST" action="{% url 'recommendation:index' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <style>
+        .item-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-right: 20px;
+            margin-top : 50px;
+        }
+        .box{
+            margin: 10px; 
+            background-color : #e3d9d0;
+            width : 200px;
+            height : 100px;
+            margin-bottom : 10px;
+            text-align : center;
+            border-radius: 400px;
+            position : relative;
+            overflow: hidden;
+        }
+        .image{
+            width : 100%;
+            height : 100%; 
+            object-fit : contain;
+            opacity: 0.5;
+        }
+        .text{
+            position : absolute;
+            top : 30%; 
+            left : 45%; 
+            transform : translate(-40%, -20%); 
+            padding-top : 10px;
+        }
+        .item-container2 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-right: 20px;
+            margin-top : 50px;
+        }
+        .box2{
+            margin: 17px; 
+            background-color : burlywood;
+            width : 200px;
+            height : 250px;
+            margin-bottom : 10px;
+            text-align : center;
+            padding : 42px 10px 0px 10px;
+        }
+        .title{
+            margin-top : 20px;
+            margin-left : 10px;
+        }
+        .title2{
+            margin-top : 30px;
+            margin-left : 10px;
+        }
+    </style>
+
+    <br>
+    <div class='title mt-3'>
+        <br>
+        <h3 style="text-align: center; font-weight: bold; color:#ac5034"> CATEGORY </h3>
+    </div>
+    <br>
+    <div class="item-container">
+        {% for item in top10 %}
+            {% if item.0 == '패션의류/잡화'%}
+                {% if item.1 == '여성패션' %} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/1.fashion_products/1.women fashion.png' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '남성패션' %}
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/1.fashion_products/2.men fashion.png' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '남녀 공용 의류' %}
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/1.fashion_products/3.unisex fashion.png' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '유아동패션' %}
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/1.fashion_products/4.children fashion.png' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% endif %}
+            {% elif item.0 == '뷰티'%}
+                {% if item.1 == '로켓력셔리'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/1.luxury.jpg' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '스킨케어'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/2.skincare.png' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '클린/비건뷰티'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/3.cleanvegan beauty.png' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '클렌징/필링'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/4.cleansingfilling.jpg' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '더마코스메틱'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/5.dermacosmetic.jpg' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '메이크업'%} 
+                
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/2.beauty_products/6.makeup.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '향수'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/7.perfume.jpg' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '남성화장품'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/8.men cosmetics.jpg' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '네일'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/9.nail.jpg' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '뷰티소품'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/10.beautyaccessories.jpg' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '어린이화장품'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/11.children cosmetics.png' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '로드샵'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/12.road shop.png' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '헤어'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/13.hair.jpg' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '바디'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/14.body.jpg' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% elif item.1 == '선물세트/키트'%} 
+                <div class='box'>
+                    <div class ='image'>
+                        <img src="{% static 'images/category/2.beauty_products/15.gift set kit.jpg' %}" alt="">
+                    </div>
+                    <div class ='text'>
+                    <strong>{{ item.0 }}</strong><br>
+                    {{ item.1 }}
+                    </div>
+                </div>
+                {% endif %}
+            {% elif item.0 == '출산/유아동'%} 
+                {% if item.1 == '유아동패션'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/1.children fashion.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '기저귀'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/2.diapers.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '물티슈'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/3.wet tissue.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '분유/어린이식품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/4.powdered milk.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '어린이 건강식품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'static/images/category/3.baby_products/5.children healthfood.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '수유용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/6.nursing.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '이유용품/유아식기'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/7.baby products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '매트/안전용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/8.mat safety products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '유모차/웨건'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/9.stroller.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '카시트'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/10.car seat.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '아기띠/외출용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/11.baby belt.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '욕실용품/스킨케어'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/12.bathroom products.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '위생/건강/세제'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/13.cleanliness.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '유아동침구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/14.child bedding.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '유아가구/인테리어'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/15.child furniture interiors.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '완구/교구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/3.baby_products/16.toys.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% elif item.0 == '식품'%}
+                {% if item.1 == '유기농/친환경 전문관'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/1.organic.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div> 
+                {% elif item.1 == '과일'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/2.fruit.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div> 
+                {% elif item.1 == '견과/건과'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/3.nuts.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '채소'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/4.vegetable.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '쌀/잡곡'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/5.rice grain.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '축산/계란'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/6.livestock egg.webp' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '수산물/건어물'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/7.seafood.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '생수/음료'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/8.water.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '커피/원두/차'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/9.coffee.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '과자/초콜릿/시리얼'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/10.snack.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '면/통조림/가공식품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/11.processed food.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '가루/조미료/오일'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/12.poweder.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '장/소스/드레싱/식초'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/13.sauce.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '유제품/아이스크림'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/14.ice cream.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '냉장/냉동/간편요리'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/15.frozen food.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '건강식품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/4.food_products/16.health_food.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% elif item.0 == '주방용품'%} 
+                {% if item.1 == '주방가전'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/1.kitchen appliances.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '냄비/프라이팬'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/2.pot frying pan.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '주방조리도구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/3.kitchen cookware.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '그릇/홈세트'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/4.bowl.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '수저/커트러리'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/5.cutlery.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '컵/텀블러/와인용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/6.cup.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '주전자/커피/티용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/7.teakettle.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '주방수납/정리'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/8.kitchen storage.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '밀폐저장/도시락'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/9.sealed_storage.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '주방잡화'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/10.kitchen_goods.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '일회용품/종이컵'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/11.disposable_products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '보온/보냉용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/12.thermos.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '1인가구 주방용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/5.kitchen_products/13.single person.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% elif item.0 == '생활용품'%} 
+                {% if item.1 == '방한용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/1.anti-cold products.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '헤어'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/2.hair.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '바디/세안'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/3.body.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '구강/면도'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/4.oral.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '화장지/물티슈'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/5.papers.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '생리대/성인기저귀'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/6.pad.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '기저귀'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/7.diaper.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '세탁세제'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/8.laundry.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '청소/주방세제'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/9.cleaning.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '탈취/방향/살충'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/10.fragrance.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '건강/의료용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/11.health products.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '성인용품(19)'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/12.adult products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '세탁/청소용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/13.laundry products.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '욕실용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/14.bathroom products.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '생활전기용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/15.electrical products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '수납/정리'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/6.living_prodcuts/16.storage.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% elif item.0 == '홈인테리어'%} 
+                {% if item.1 == '방한용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/1.anti-cold products.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == 'F/W 침구샵'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/2.fw bedding Shop.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '싱글하우스'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/3.single house.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '홈데코'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/4.home decoration.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '가구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/5.furniture.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '수납/정리'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/6.storage.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '침구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/7.bedding.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '커튼/블라인드'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/8.curtain.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '카페트/쿠션/거실화'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/9.carpet.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '수예/수선'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/10.handicraft.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '욕실용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/11.bathroom products.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '조명/스탠드'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/12.ligting.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '셀프인테리어'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/13.self interior.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '원예/가드닝'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/14.gardening.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '생활전기용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/15.electrical products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '공구/철물/DIY'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/7.home_interior_products/16.tools.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% elif item.0 == '가전디지털'%}
+                {% if item.1 == 'TV/영상가전'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'mages/category/8.home_appliance_digital_products/1.tv.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '냉장고'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/2.refrigerator.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '세탁기/건조기'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/3.washing machine.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '생활가전'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/4.household appliances.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '청소기'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/5.vacuum.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '계절가전'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/6.seasonal home appliances.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '뷰티/헤어가전'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/7.beauty appliances.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '건강가전'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'static/images/category/8.home_appliance_digital_products/8.Health home appliances.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '주방가전'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/9.kitchen appliances.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '노트북'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/10.laptop.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '데스크탑'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/11.desktop.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '모니터'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/12.monitor.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '휴대폰'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/13.Cell phone.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '태블릿PC'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/14.tablet PC.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '스마트워치/밴드'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/15.smart watch.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '게임'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/8.home_appliance_digital_products/16.game.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% elif item.0 == '스포츠/레저'%} 
+                {% if item.1 == '캠핑전문관'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/1.camp.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '홈트레이닝'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/2.home training.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '수영/수상스포츠'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/3.swim.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '골프'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/4.golf.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '자전거'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/5.bicycle.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '킥보드/스케이트'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/6.kickboard.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>\{% elif item.1 == '자전거'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/5.bicycle.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '킥보드/스케이트'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/6.kickboard.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '낚시'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/7.Fishing.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '등산/아웃도어'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/8.mountain climbing.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '스포츠신발'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/9.sports shoes.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '남성스포츠의류'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/10.men sportswear.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '여성스포츠의류'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/11.Women sportswear.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '유아스포츠의류'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/12.children sportswear.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '스포츠잡화'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/13.sports products.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '구기스포츠'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/14.ball sports.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '라켓스포츠'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/15.racket sports.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '헬스/요가/댄스'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/9.sport_leisure_products/16.fitness.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% elif item.0 == '자동차용품'%} 
+                {% if item.1 == '겨울철 차량관리'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'static/images/category/10.car_products/1.chain.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '인테리어'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/10.car_products/2.interior.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '익스테리어'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/10.car_products/3.exterior.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '세차/카케어'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/10.car_products/4.car wash.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '차량용 전자기기'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/10.car_products/5.electronic device.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '차량관리/소모품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/10.car_products/6.vehicle products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == 'RV/아웃도어'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/10.car_products/7.rv.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '부품/안전/공구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/10.car_products/8.tools.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '오토바이용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/10.car_products/9.motorcycle products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '로켓설치 타이어'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/10.car_products/10.tire.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% elif item.0 == '도서/음반/DVD'%} 
+                {% if item.1 == '유아/어린이'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/1.kids.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '소설/에세이/시'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/2.novel.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '초중고참고서'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/3.school book.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '가정 살림'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/4.family.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '건강 취미'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/5.health.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '경제 경영'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/6.economy.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '과학/공학'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/7.science.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '국어/외국어/사전'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/8.dictionary.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '대학교재'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/9.university textbook.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '만화/라이트노벨'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/10.cartoon.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '사회정치'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/11.social.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '수험서/자격증'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/12.exam.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '여행'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/13.travel.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '역사'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/14.history.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '예술'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/15.art.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '인문'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/11.book_music_dvd_products/16.human.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% elif item.0 == '완구/취미'%} 
+                {% if item.1 == '캐릭터별완구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/1.character.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '신생아/영아완구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/2.baby.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '로봇/작동완구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/3.robot.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '역할놀이'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/4.role play.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '블록놀이'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/5.block games.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '인형'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/6.doll.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '물놀이/계절완구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/7.seasonal toys.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '승용완구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/8.car toys.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '스포츠/야외완구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/9.sports.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '실내대형완구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/10.indoor toys.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == 'STEAM완구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/11.steam toys.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '학습완구/교구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/12.learning toys.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '보드게임'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/13.board game.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == 'RC완구/부품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/14.RC toys.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '퍼즐/큐브/피젝토이'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/15.puzzle.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '프라모델'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/12.toy_products/16.pla-model.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% elif item.0 == '문구/오피스'%} 
+                {% if item.1 == '사무용품전문관'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/1.office products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '데코/포장용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/10.decoration.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div> 
+                {% elif item.1 == '미술/화방용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/2.art products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '캐릭터 문구'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/3.character phrase.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '학용품/수업준비'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/4.school.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '필기류'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/5.handwriting.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '노트/메모지'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/6.note.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '다이어리/플래너'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/7.diary.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '바인더/파일'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/8.Binder.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '파티/이벤트'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/9.party.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '카드/엽서/봉투'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/11.card.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '앨범'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/12.album.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '복사용품/라벨지'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/13.copy products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '보드/칠판/광고'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/13.office_products/14.board.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% endif %}
+            
+            {% elif item.0 == '반려동물용품'%}
+                {% if item.1 == '강아지 사료'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/14.pet_products/1.dog food.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '강아지 간식'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/14.pet_products/2.dog snacks.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '강아지 영양제'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/14.pet_products/3.dog supplements.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '강아지 용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/14.pet_products/4.dog products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '고양이 사료'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/14.pet_products/5.cat food.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '고양이 간식'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/14.pet_products/6.cat snacks.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '고양이 영양제'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/14.pet_products/7.cat supplements.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '펫티켓 산책용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/14.pet_products/9. walking products.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '관상어 용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/14.pet_products/10.ornamental fish products.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '소동물/가축용품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/14.pet_products/11.small animals.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% elif item.0 == '헬스/건강식품'%} 
+                {% if item.1 == '건강기능식품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/1.health.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '성인용 건강식품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/2.adults.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '여성용 건강식품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/3.women.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '남성용 건강식품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/4.men.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '임산부 건강식품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/5.Pregnant Women_s.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '시니어 건강식품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/6.senior.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '어린이 건강식품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/7.children.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '비타민/미네랄'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/8.vitamins.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '영양제'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/9.Nutritional supplements.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '허브/식물추출물'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/10.herb.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '홍삼/인산'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/11.red ginseng.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '건강즙/음료'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/12.health juice.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '꿀/프로폴리스'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/13.honey.jpg' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '건강분말/건강환'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/14.health powder.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '헬스보충식품'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/15.health supplement.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+                {% elif item.1 == '다이어트/이너뷰티'%} 
+                    <div class='box'>
+                        <div class ='image'>
+                            <img src="{% static 'images/category/15.health_products/16.diet.png' %}" alt="">
+                        </div>
+                        <div class ='text'>
+                        <strong>{{ item.0 }}</strong><br>
+                        {{ item.1 }}
+                        </div>
+                    </div>
+
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+    </div>
+    <br>
+    <div class='title2 mt-5'>
+        <h3 style="text-align: center; font-weight: bold; color:#ac5034;"> RECOMMENDED PRODUCTS </h3>
+    </div>
+    <br>
+
+    <div class="item-container2">
+        {% for item in top2 %}
+        <ol> <div class='box2' style = "cursor: default;" onclick="location.href='{{ item.3 }}';">
+            <div><i style="font-size: smaller;">{{ item.0 }}</i></div>
+            <div><i style="font-size: smaller;">{{ item.1 }}</i></div>
+            <div><strong>{{ item.2 }}</strong></div>
+            <br>
+            
+            <div>⭐️{{item.4}}
+                ({{item.5}})</div>
+            
+        </div></ol>
+        {% endfor %}
+    </div>
+</form>
+{% endblock recommend %} 
+            {% comment %} 
+            {% elif item.0 == '헬스/건강식품' and item.1 == '영양제' %}
+            <div class='box'>
+                <div class="image-container"> static/images/category/1.fashion_products/1.women fashion.png
+                    <img src="{% static 'images/beauty_makeup.jpg' %}" alt="Beauty Makeup" >
+                </div>
+            <ol>{{ item.0 }} - {{ item.1 }}</ol>
+            </div> {% endcomment %}

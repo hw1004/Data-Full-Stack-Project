@@ -9,7 +9,8 @@
     - [Data Engineering](#data-engineering)
       - [1. Web crawling](#1-web-crawling)
       - [2. Data Pipeline](#2-data-pipeline)
-    - [NLP (DL models)](#nlp-dl-models)
+    - [Deep Learning NLP](#deep-learning-nlp)
+    - [Django 웹서비스 구현](#django-웹서비스-구현)
 
 
 ## 프로젝트 소개
@@ -61,7 +62,7 @@
    - `new_review_dw`: hdfs에 있는 new_review 파일을 DW에 적재
    - `new_review_dm`: dw의 new_review table에 id를 PK로 추가하여 DM에 적재
 
-### NLP (DL models)
+### Deep Learning NLP
 1. 데이터 전처리 진행 (결측치, 특수문자, 불용어 등 고려)
    - 토근화하고 불용어(stopwords) 제거
    - 토큰화된 학습 데이터를 활용해 단어사전 생성
@@ -86,11 +87,27 @@
 |불용어 처리 후 es 설정|0.6872|0.6875|0.6738|0.6810|
 |불용어 처리 후 es 미설정|0.6851|0.6725|0.6555|0.6745|
 
-5. 전체적으로 0.7 정도의 정확도를 나타내지만 overfitting이 일어나기 때문에 새로운 모델인 Ko-Bert 모델을 적용함
+5. 전체적으로 0.7 정도의 정확도를 나타내지만 overfitting이 일어나기 때문에 새로운 모델인 **Ko-Bert** 모델을 적용함
    - 기존 Bert 모델 : 자연어 처리 딥러닝 모델로 Transformer 아키텍처를 기반으로 하고 양방향 학습을 사용하여 이전의 모델들보다 더 좋은 성능을 보임
    - Ko-Bert : 기존 Bert 모델의 한국어 성능 한계 극복을 위해 개발
    - epoch 5회 진행 후, 정확도 0.8838로 가장 좋게 나타남
 
 
-
-
+### Django 웹서비스 구현
+1. 메인 페이지
+<img width="362" alt="메인 페이지" src="https://github.com/hw1004/Data-Full-Stack-Project/assets/109745250/a50c8b96-1a5c-44ed-b954-ce07412e20f5">
+2. 로그인, 회원가입 기능
+![스크린샷 2024-02-22 191507](https://github.com/hw1004/Data-Full-Stack-Project/assets/109745250/54b162a9-b631-4be0-8f24-1251e75b8bff)
+3. 리뷰 분석 시각화 (로그인, 비로그인 동일하게 보임)
+![스크린샷 2024-02-22 191559](https://github.com/hw1004/Data-Full-Stack-Project/assets/109745250/5be51c8f-1819-434f-9192-2ee15eb337cc)
+4. 제품 추천/카테고리 추천
+![스크린샷 2024-02-22 192657](https://github.com/hw1004/Data-Full-Stack-Project/assets/109745250/66b879e6-3a1f-477f-80b9-1b98142c9005)
+- 로그인 시 고객이 작성한 리뷰들에 대한 제품 정보를 기반으로 카테고리와 제품을 추천한다. 카테고리별 **리뷰 개수와 평균 별점**으로 가중치를 준다.
+- 비로그인 시 전체 데이터에 대한 리뷰 개수, 평점으로 가중치를 주어 추천을 진행한다.
+5. 리뷰 별점 예측 시스템
+- 비로그인 고객은 마이쿠팡 메뉴가 아닌 리뷰 별점 예측 메뉴가 보인다. 리뷰를 입력했을 때 그에 대한 예측 별점을 확인해볼 수 있는 기능을 로그인 하지 않아도 사용할 수 있게 기획하였다.
+![스크린샷 2024-02-22 192947](https://github.com/hw1004/Data-Full-Stack-Project/assets/109745250/f6fbf048-281e-4087-af2c-c05af8489ec7)
+- 로그인을 한 고객은 마이쿠팡 메뉴가 보인다. 자신이 작성한 리뷰를 마이쿠팡 페이지에서 확인할 수 있다.
+![스크린샷 2024-02-22 193038](https://github.com/hw1004/Data-Full-Stack-Project/assets/109745250/73714878-f294-457f-b073-2f10577bca67)
+- 마이쿠팡 페이지에서 새 리뷰 작성 버튼 클릭 시 제품을 선택하고 리뷰를 작성할 수 있다. 이 때, 별점을 따로 고객이 입력하지 않아도 작성한 리뷰를 바탕으로 저장이 되며 저장된 리뷰는 마이쿠팡 페이지에 airflow로 업데이트 된다.
+![스크린샷 2024-02-22 193053](https://github.com/hw1004/Data-Full-Stack-Project/assets/109745250/43d2eddf-3b44-4e1a-a953-7f589d7b76c2)

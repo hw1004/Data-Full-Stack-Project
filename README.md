@@ -100,6 +100,7 @@
 ### Django 웹서비스 구현
 1. 메인 페이지
 <img width="362" alt="메인 페이지" src="https://github.com/hw1004/Data-Full-Stack-Project/assets/109745250/a50c8b96-1a5c-44ed-b954-ce07412e20f5">
+
 2. 로그인, 회원가입 기능
 ![스크린샷 2024-02-22 191507](https://github.com/hw1004/Data-Full-Stack-Project/assets/109745250/54b162a9-b631-4be0-8f24-1251e75b8bff)
 3. 리뷰 분석 시각화 (로그인, 비로그인 동일하게 보임)

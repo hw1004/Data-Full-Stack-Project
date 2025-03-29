@@ -10,11 +10,9 @@
       - [1. Web crawling](#1-web-crawling)
       - [2. Data Pipeline](#2-data-pipeline)
     - [Deep Learning NLP](#deep-learning-nlp)
-    - [Django 웹서비스 구현](#django-웹서비스-구현)
     - [결론 및 향후분석 방향성](#결론-및-향후분석-방향성)
       - [1. 결론](#1-결론)
       - [2. 향후 분석](#2-향후-분석)
-    - [프로젝트 후기](#프로젝트-후기)
 
 
 ## 프로젝트 소개
